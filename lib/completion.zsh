@@ -25,7 +25,11 @@ else
 fi
 unset CASE_SENSITIVE HYPHEN_INSENSITIVE
 
-zstyle ':completion:*' list-colors ''
+if [[ -z $LS_COLORS ]]; then
+  zstyle ':completion:*' list-colors ''
+else
+  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+fi
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 
 if [[ "$OSTYPE" = solaris* ]]; then
